@@ -5,151 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tu Marca</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;margin:0;background:#fff;color:#111;}
 
-body{
-    font-family:'Inter',sans-serif;
-    background:#fff;
-    color:#111;
-}
-
-/* HEADER */
-header{
-    padding:60px 20px 30px;
-    text-align:center;
-}
-
-header h1{
-    font-size:28px;
-    font-weight:500;
-    letter-spacing:1px;
-}
-
-header p{
-    margin-top:8px;
-    color:#777;
-    font-size:14px;
-}
-
-/* NAV */
-.nav{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    padding-bottom:20px;
-    flex-wrap:wrap;
-}
-
-.nav button{
-    border:none;
-    background:#f2f2f2;
-    padding:8px 16px;
-    border-radius:20px;
-    cursor:pointer;
-    font-size:13px;
-    transition:.3s;
-}
-
-.nav button:hover{
-    background:#111;
-    color:#fff;
-}
-
-/* GRID APPLE STYLE */
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-}
+header{text-align:center;padding:50px 20px;}
 
 .grid{
     display:grid;
     grid-template-columns:repeat(6,1fr);
     gap:20px;
+    padding:20px;
 }
 
-@media(max-width:900px){
-    .grid{grid-template-columns:repeat(2,1fr);}
-}
-
-/* CARD */
 .card{
-    border-radius:18px;
+    border-radius:16px;
     overflow:hidden;
-    background:#f7f7f7;
-    position:relative;
-    transition:.3s;
+    cursor:pointer;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-}
+.card img{width:100%;height:100%;object-fit:cover;}
 
-.card img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* tamaños dinámicos */
 .big{grid-column:span 3;height:400px;}
 .medium{grid-column:span 2;height:300px;}
 .small{grid-column:span 1;height:250px;}
 
 @media(max-width:900px){
-    .big,.medium,.small{
-        grid-column:span 2;
-        height:300px;
-    }
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .big,.medium,.small{grid-column:span 2;height:300px;}
 }
 
-/* overlay */
-.info{
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    padding:15px;
-    background:linear-gradient(transparent,rgba(0,0,0,0.7));
-    color:#fff;
+/* MODAL */
+.modal{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.8);
+    display:none;
+    justify-content:center;
+    align-items:center;
 }
 
-.info h3{
-    font-size:14px;
-    font-weight:500;
-}
-
-.price{
-    font-size:13px;
-    opacity:.8;
-}
-
-/* botones */
-.btn{
-    display:inline-block;
-    margin-top:8px;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:12px;
-    text-decoration:none;
+.modal-content{
     background:#fff;
-    color:#111;
+    padding:20px;
+    border-radius:16px;
+    max-width:500px;
+    width:90%;
 }
 
-.sold{
-    font-size:12px;
-    opacity:.7;
+.modal img{
+    width:100%;
+    border-radius:10px;
 }
 
-/* footer */
-footer{
-    text-align:center;
-    padding:40px;
-    font-size:12px;
-    color:#aaa;
+.thumbs{
+    display:flex;
+    gap:5px;
+    margin-top:10px;
+}
+
+.thumbs img{
+    width:60px;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+select{
+    width:100%;
+    padding:8px;
+    margin-top:10px;
+}
+
+.btn{
+    margin-top:15px;
+    padding:10px;
+    width:100%;
+    border:none;
+    background:#111;
+    color:#fff;
+    border-radius:10px;
+    cursor:pointer;
 }
 </style>
 </head>
@@ -157,52 +94,94 @@ footer{
 <body>
 
 <header>
-    <h1>TU MARCA</h1>
-    <p>Diseños fuera de lo común</p>
+<h2>TU MARCA</h2>
 </header>
 
-<div class="nav">
-    <button onclick="filtrar('todos')">Todo</button>
-    <button onclick="filtrar('pijamas')">Pijamas</button>
-    <button onclick="filtrar('accesorios')">Accesorios</button>
-</div>
+<div class="grid" id="productos"></div>
 
-<div class="container">
-    <div class="grid" id="productos"></div>
-</div>
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <img id="mainImg">
+        
+        <div class="thumbs" id="thumbs"></div>
 
-<footer>© 2026 TU MARCA</footer>
+        <h3 id="nombre"></h3>
+
+        <select id="color"></select>
+        <select id="talla"></select>
+
+        <button class="btn" onclick="enviar()">Enviar por WhatsApp</button>
+    </div>
+</div>
 
 <script src="productos.js"></script>
 
 <script>
-function render(data){
-    const cont=document.getElementById("productos");
-    cont.innerHTML="";
+let productoActual=null;
 
-    data.forEach(p=>{
+function render(){
+    const cont=document.getElementById("productos");
+    productos.forEach((p,i)=>{
         cont.innerHTML+=`
-        <div class="card ${p.size}">
-            <img src="${p.img}">
-            <div class="info">
-                <h3>${p.nombre}</h3>
-                <div class="price">$${p.precio}</div>
-                ${
-                    p.agotado
-                    ? `<div class="sold">Agotado</div>`
-                    : `<a class="btn" href="https://wa.me/593XXXXXXXXX?text=Quiero%20${p.nombre}">Comprar</a>`
-                }
-            </div>
+        <div class="card ${p.size}" onclick="abrir(${i})">
+            <img src="${p.imgs[0]}">
         </div>`;
     });
 }
 
-function filtrar(cat){
-    if(cat==="todos") return render(productos);
-    render(productos.filter(p=>p.categoria===cat));
+function abrir(i){
+    productoActual=productos[i];
+    document.getElementById("modal").style.display="flex";
+    document.getElementById("mainImg").src=productoActual.imgs[0];
+    document.getElementById("nombre").innerText=productoActual.nombre;
+
+    // thumbnails
+    const thumbs=document.getElementById("thumbs");
+    thumbs.innerHTML="";
+    productoActual.imgs.forEach(img=>{
+        thumbs.innerHTML+=`<img src="${img}" onclick="cambiar('${img}')">`;
+    });
+
+    // colores
+    const color=document.getElementById("color");
+    color.innerHTML="";
+    productoActual.colores.forEach(c=>{
+        color.innerHTML+=`<option>${c}</option>`;
+    });
+
+    // tallas
+    const talla=document.getElementById("talla");
+    talla.innerHTML="";
+    productoActual.tallas.forEach(t=>{
+        talla.innerHTML+=`<option>${t}</option>`;
+    });
 }
 
-render(productos);
+function cambiar(img){
+    document.getElementById("mainImg").src=img;
+}
+
+function enviar(){
+    const color=document.getElementById("color").value;
+    const talla=document.getElementById("talla").value;
+
+    const texto=`Hola, quiero este producto:
+${productoActual.nombre}
+Color: ${color}
+Talla: ${talla}`;
+
+    window.open(`https://wa.me/593XXXXXXXXX?text=${encodeURIComponent(texto)}`);
+}
+
+// cerrar modal
+document.getElementById("modal").onclick=function(e){
+    if(e.target.id==="modal"){
+        this.style.display="none";
+    }
+}
+
+render();
 </script>
 
 </body>
