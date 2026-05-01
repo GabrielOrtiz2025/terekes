@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Marca</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #111;
+    color: #fff;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.card {
+    background: #1c1c1c;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.agotado {
+    background: red;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+🔥 TU MARCA 🔥
+</header>
+
+<div class="grid">
+
+<!-- PRODUCTO 1 -->
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<h3>Pijama Anime</h3>
+<p>$25</p>
+<a class="btn" href="https://wa.me/593XXXXXXXXX?text=Quiero%20la%20pijama%20anime">Comprar</a>
+</div>
+
+<!-- PRODUCTO AGOTADO -->
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<h3>Pijama Edición Limitada</h3>
+<p>$30</p>
+<div class="btn agotado">AGOTADO</div>
+</div>
+
+</div>
+
+</body>
+</html>
