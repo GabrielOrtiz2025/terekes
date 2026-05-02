@@ -16,7 +16,7 @@ const productos = [
     desc: "Producto de prueba",
     categoria: "accesorios",
     imgs: [
-        "https://via.placeholder.com/483x604"
+        "img/img1.jpg"
     ],
     colores: ["Negro"],
     tallas: ["Única"]
@@ -27,7 +27,7 @@ const productos = [
     desc: "Cerámica",
     categoria: "mugs",
     imgs: [
-        "https://via.placeholder.com/483x604"
+        "img/img1.jpg"
     ],
     colores: ["Blanco"],
     tallas: ["Única"]
@@ -38,7 +38,7 @@ const productos = [
     desc: "100% algodón",
     categoria: "camisetas",
     imgs: [
-        "https://via.placeholder.com/483x604"
+        "img/img1.jpg"
     ],
     colores: ["Negro"],
     tallas: ["S","M","L"]
@@ -49,7 +49,7 @@ const productos = [
     desc: "Oversize",
     categoria: "hoodies",
     imgs: [
-        "https://via.placeholder.com/483x604"
+        "img/img1.jpg"
     ],
     colores: ["Negro"],
     tallas: ["M","L"]
