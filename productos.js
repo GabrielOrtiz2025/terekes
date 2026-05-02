@@ -12,10 +12,9 @@ const productos = [
 },
 {
     nombre: "Accesorio X",
-    imgs: [
-        "https://via.placeholder.com/400x500",
-        "https://via.placeholder.com/400x400"
-    ],
+   imgs: [
+    "img/img1.jpg"
+],
     colores: ["Negro","Gris"],
     tallas: ["Única"],
     size: "medium"
