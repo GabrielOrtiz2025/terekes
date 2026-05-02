@@ -5,37 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tu Marca</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
-    font-family:'Inter',sans-serif;
+    margin:0;
+    font-family:sans-serif;
     background:#000;
-    color:#fff;
-}
-
-/* HEADER */
-header{
-    text-align:center;
-    padding:40px 20px;
-    color:#f5f5dc; /* beige */
+    color:#f5f5dc;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 /* BOTONERA */
 .nav{
-    display:grid;
-    grid-template-columns:repeat(4,150px);
-    justify-content:center;
+    display:flex;
     gap:10px;
-    margin-bottom:30px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:30px 0;
 }
 
 .nav button{
-    padding:10px;
+    padding:10px 20px;
     border-radius:20px;
-    border:1px solid #556b2f; /* verde oliva */
+    border:1px solid #556b2f;
     background:#111;
     color:#f5f5dc;
     cursor:pointer;
@@ -46,11 +39,11 @@ header{
     color:#fff;
 }
 
-/* GALERÍA */
+/* GALERIA */
 .grid{
     display:grid;
-    grid-template-columns:repeat(4,483px);
-    grid-template-rows:repeat(2,604px);
+    grid-auto-flow:column;
+    grid-template-rows:repeat(3,604px);
     gap:20px;
     justify-content:center;
 }
@@ -58,12 +51,10 @@ header{
 .card{
     width:483px;
     height:604px;
-    background:#111;
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:16px;
-    overflow:hidden;
     position:relative;
-    cursor:pointer;
+    overflow:hidden;
+    border-radius:16px;
+    background:#111;
 }
 
 .card img{
@@ -78,70 +69,26 @@ header{
     bottom:0;
     width:100%;
     padding:15px;
-    background:linear-gradient(transparent,rgba(0,0,0,0.8));
-    color:#f5f5dc;
+    background:linear-gradient(transparent,black);
 }
 
-/* MODAL */
-.modal{
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:#000;
-    display:none;
-    justify-content:center;
-    align-items:center;
-}
-
-.modal-content{
-    width:90%;
-    max-width:500px;
-}
-
-.modal img{
-    width:100%;
-    border-radius:10px;
-}
-
-.thumbs{
-    display:flex;
-    gap:5px;
-    margin-top:10px;
-}
-
-.thumbs img{
-    width:60px;
-    cursor:pointer;
-}
-
-select{
-    width:100%;
-    margin-top:10px;
-    padding:10px;
-    background:#111;
-    color:#fff;
-    border:1px solid #556b2f;
-    border-radius:8px;
-}
-
+/* BOTON WHATSAPP */
 .btn{
-    margin-top:15px;
-    width:100%;
-    padding:12px;
+    margin-top:10px;
+    padding:8px;
     background:#556b2f;
-    color:#fff;
     border:none;
-    border-radius:20px;
+    color:white;
+    border-radius:10px;
     cursor:pointer;
+    width:100%;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h2>TU MARCA</h2>
-</header>
+<h2>TU MARCA</h2>
 
 <div class="nav">
     <button onclick="filtrar('pijamas')" class="active">Pijamas</button>
@@ -153,121 +100,42 @@ select{
 
 <div class="grid" id="productos"></div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <img id="mainImg">
-        <div class="thumbs" id="thumbs"></div>
-
-        <h3 id="nombre"></h3>
-        <p id="desc"></p>
-
-        <select id="color"></select>
-        <select id="talla"></select>
-
-        <button class="btn" onclick="enviar()">Enviar a WhatsApp</button>
-    </div>
-</div>
-
 <script src="productos.js"></script>
 
 <script>
-let productoActual=null;
-
-const placeholder="https://via.placeholder.com/483x604?text=Producto";
-
-function renderCategoria(cat){
+function render(data){
     const cont=document.getElementById("productos");
     cont.innerHTML="";
 
-    let filtrados=productos.filter(p=>p.categoria===cat);
-
-    // llenar hasta 8
-    while(filtrados.length<8){
-        filtrados.push(null);
-    }
-
-    filtrados.slice(0,8).forEach((p,i)=>{
-        if(p){
-            cont.innerHTML+=`
-            <div class="card" onclick="abrir(${i})">
-                <img src="${p.imgs[0]}">
-                <div class="info">${p.nombre}</div>
-            </div>`;
-        }else{
-            cont.innerHTML+=`
-            <div class="card">
-                <img src="${placeholder}">
-            </div>`;
-        }
+    data.forEach(p=>{
+        cont.innerHTML+=`
+        <div class="card">
+            <img src="${p.imgs[0]}">
+            <div class="info">
+                <b>${p.nombre}</b><br>
+                ${p.desc}
+                <button class="btn" onclick="comprar('${p.nombre}')">
+                    Enviar por WhatsApp
+                </button>
+            </div>
+        </div>`;
     });
 }
 
 function filtrar(cat){
-    document.querySelectorAll(".nav button").forEach(btn=>btn.classList.remove("active"));
+    document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
     event.target.classList.add("active");
-    renderCategoria(cat);
-}
 
-function abrir(i){
-    const cat=document.querySelector(".nav .active").innerText.toLowerCase();
     const filtrados=productos.filter(p=>p.categoria===cat);
-
-    productoActual=filtrados[i];
-
-    if(!productoActual) return;
-
-    document.getElementById("modal").style.display="flex";
-    document.getElementById("mainImg").src=productoActual.imgs[0];
-    document.getElementById("nombre").innerText=productoActual.nombre;
-    document.getElementById("desc").innerText=productoActual.desc;
-
-    const thumbs=document.getElementById("thumbs");
-    thumbs.innerHTML="";
-    productoActual.imgs.forEach(img=>{
-        thumbs.innerHTML+=`<img src="${img}" onclick="cambiar('${img}')">`;
-    });
-
-    const color=document.getElementById("color");
-    color.innerHTML="";
-    productoActual.colores.forEach(c=>{
-        color.innerHTML+=`<option>${c}</option>`;
-    });
-
-    const talla=document.getElementById("talla");
-    talla.innerHTML="";
-    productoActual.tallas.forEach(t=>{
-        talla.innerHTML+=`<option>${t}</option>`;
-    });
+    render(filtrados);
 }
 
-function cambiar(img){
-    document.getElementById("mainImg").src=img;
+function comprar(nombre){
+    const texto=`Hola, quiero comprar: ${nombre}`;
+    window.open(`https://api.whatsapp.com/send?phone=593998588745&text=${encodeURIComponent(texto)}`);
 }
 
-function enviar(){
-    if(!productoActual) return;
-
-    const color=document.getElementById("color").value;
-    const talla=document.getElementById("talla").value;
-
-    const texto=`Hola, quiero este producto:
-${productoActual.nombre}
-${productoActual.desc}
-Color: ${color}
-Talla: ${talla}`;
-
-    window.location.href=`https://api.whatsapp.com/send?phone=593998588745&text=${encodeURIComponent(texto)}`;
-}
-
-document.getElementById("modal").onclick=function(e){
-    if(e.target.id==="modal"){
-        this.style.display="none";
-    }
-}
-
-// default
-renderCategoria("pijamas");
+render(productos.filter(p=>p.categoria==="pijamas"));
 </script>
 
 </body>
