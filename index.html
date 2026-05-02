@@ -9,11 +9,16 @@
 body{
     margin:0;
     font-family:sans-serif;
-    background:#000;
-    color:#f5f5dc;
+    background:#fff;
+    color:#111;
     display:flex;
     flex-direction:column;
     align-items:center;
+}
+
+/* TITULO */
+h2{
+    margin-top:30px;
 }
 
 /* BOTONERA */
@@ -26,62 +31,75 @@ body{
 }
 
 .nav button{
-    padding:10px 20px;
+    padding:10px 18px;
     border-radius:20px;
-    border:1px solid #556b2f;
-    background:#111;
-    color:#f5f5dc;
+    border:1px solid #ddd;
+    background:#fff;
+    color:#333;
     cursor:pointer;
+    transition:.2s;
 }
 
 .nav button.active{
-    background:#556b2f;
-    color:#fff;
+    border:1px solid #999;
+    background:#f5f5f5;
 }
 
-/* GALERIA */
+/* GALERIA CORRECTA */
 .grid{
     display:grid;
-    grid-auto-flow:column;
-    grid-template-rows:repeat(3,604px);
+    grid-template-columns:repeat(3, 483px); /* 3 por fila */
     gap:20px;
     justify-content:center;
 }
 
+/* CARD */
 .card{
     width:483px;
     height:604px;
-    position:relative;
+    border:1px solid #e5e5e5;
+    border-radius:14px;
     overflow:hidden;
-    border-radius:16px;
-    background:#111;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
 }
 
+/* IMAGEN */
 .card img{
     width:100%;
-    height:100%;
+    height:80%;
     object-fit:cover;
 }
 
-/* overlay */
+/* INFO */
 .info{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    padding:15px;
-    background:linear-gradient(transparent,black);
+    padding:12px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
 }
 
 /* BOTON WHATSAPP */
 .btn{
-    margin-top:10px;
-    padding:8px;
-    background:#556b2f;
+    margin-top:8px;
+    padding:10px;
     border:none;
-    color:white;
     border-radius:10px;
+    background:#25D366;
+    color:white;
     cursor:pointer;
-    width:100%;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+/* ICONO */
+.btn img{
+    width:18px;
+    height:18px;
 }
 </style>
 </head>
@@ -111,11 +129,14 @@ function render(data){
         cont.innerHTML+=`
         <div class="card">
             <img src="${p.imgs[0]}">
+
             <div class="info">
-                <b>${p.nombre}</b><br>
-                ${p.desc}
+                <b>${p.nombre}</b>
+                <span>${p.desc}</span>
+
                 <button class="btn" onclick="comprar('${p.nombre}')">
-                    Enviar por WhatsApp
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+                    Quiero pedir este producto
                 </button>
             </div>
         </div>`;
@@ -131,10 +152,11 @@ function filtrar(cat){
 }
 
 function comprar(nombre){
-    const texto=`Hola, quiero comprar: ${nombre}`;
+    const texto=`Hola, quiero pedir este producto: ${nombre}`;
     window.open(`https://api.whatsapp.com/send?phone=593998588745&text=${encodeURIComponent(texto)}`);
 }
 
+/* DEFAULT */
 render(productos.filter(p=>p.categoria==="pijamas"));
 </script>
 
