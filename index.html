@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tu Marca</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
+
 body{
     margin:0;
-    font-family:sans-serif;
+    font-family:'Inter',sans-serif;
     background:#fff;
     color:#111;
     display:flex;
@@ -16,59 +19,73 @@ body{
     align-items:center;
 }
 
-/* TITULO */
+/* HEADER */
 h2{
-    margin-top:30px;
+    margin:50px 0 10px;
+    font-weight:500;
+    letter-spacing:1px;
 }
 
 /* BOTONERA */
 .nav{
     display:flex;
-    gap:10px;
+    gap:12px;
     flex-wrap:wrap;
     justify-content:center;
-    margin:30px 0;
+    margin-bottom:50px;
 }
 
 .nav button{
-    padding:10px 18px;
-    border-radius:20px;
-    border:1px solid #ddd;
+    padding:10px 20px;
+    border-radius:30px;
+    border:1px solid #e0e0e0;
     background:#fff;
-    color:#333;
+    color:#444;
     cursor:pointer;
-    transition:.2s;
+    font-size:13px;
+    transition:.25s;
+}
+
+.nav button:hover{
+    border-color:#999;
 }
 
 .nav button.active{
-    border:1px solid #999;
-    background:#f5f5f5;
+    border-color:#111;
+    color:#111;
 }
 
-/* GALERIA CORRECTA */
+/* GALERIA */
 .grid{
     display:grid;
-    grid-template-columns:repeat(3, 483px); /* 3 por fila */
-    gap:20px;
+    grid-template-columns:repeat(3, 240px); /* 50% más pequeño */
+    gap:60px; /* MÁS ESPACIO */
     justify-content:center;
+    margin-bottom:80px;
 }
 
 /* CARD */
 .card{
-    width:483px;
-    height:604px;
-    border:1px solid #e5e5e5;
+    width:240px;
+    height:320px;
     border-radius:14px;
     overflow:hidden;
     background:#fff;
+    border:1px solid #eee;
     display:flex;
     flex-direction:column;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* IMAGEN */
 .card img{
     width:100%;
-    height:80%;
+    height:65%;
     object-fit:cover;
 }
 
@@ -77,30 +94,45 @@ h2{
     padding:12px;
     display:flex;
     flex-direction:column;
-    gap:6px;
+    gap:5px;
 }
 
-/* BOTON WHATSAPP */
+.info b{
+    font-size:13px;
+    font-weight:500;
+}
+
+.info span{
+    font-size:11px;
+    color:#777;
+}
+
+/* BOTON */
 .btn{
     margin-top:8px;
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    background:#25D366;
-    color:white;
+    padding:9px;
+    border-radius:20px;
+    border:1px solid #ddd;
+    background:#fff;
+    font-size:11px;
     cursor:pointer;
-    font-size:13px;
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
+    gap:6px;
+    transition:.25s;
 }
 
-/* ICONO */
-.btn img{
-    width:18px;
-    height:18px;
+.btn:hover{
+    background:#111;
+    color:#fff;
+    border-color:#111;
 }
+
+.btn img{
+    width:14px;
+}
+
 </style>
 </head>
 
@@ -136,7 +168,7 @@ function render(data){
 
                 <button class="btn" onclick="comprar('${p.nombre}')">
                     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-                    Quiero pedir este producto
+                    Quiero pedir
                 </button>
             </div>
         </div>`;
