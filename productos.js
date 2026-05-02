@@ -2,10 +2,8 @@ const productos = [
 {
     nombre: "Pijama Premium",
     imgs: [
-        "https://via.placeholder.com/600x800",
-        "https://via.placeholder.com/600x700",
-        "https://via.placeholder.com/600x600"
-    ],
+    "img/img1.jpg"
+],
     colores: ["Negro","Blanco","Rojo"],
     tallas: ["S","M","L"],
     size: "big"
