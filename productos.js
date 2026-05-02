@@ -17,7 +17,7 @@ const productos = [
     imgs: ["img/img2.jpg"],
     colores: ["Blanco"],
     tallas: ["S","M","L"]
-}
+},
 
 {
     nombre: "Accesorio Demo",
