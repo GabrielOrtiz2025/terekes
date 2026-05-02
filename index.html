@@ -19,25 +19,26 @@ body{
 /* HEADER */
 header{
     text-align:center;
-    padding:50px 20px 20px;
+    padding:40px 20px 10px;
 }
 
-/* CATEGORÍAS */
+/* BOTONERA PRO */
 .nav{
-    display:flex;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
     gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-    padding-bottom:20px;
+    padding:20px;
 }
 
 .nav button{
+    padding:12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.1);
     background:#2a2a2d;
-    border:1px solid rgba(255,255,255,0.08);
     color:#fff;
-    padding:8px 14px;
-    border-radius:20px;
     cursor:pointer;
+    font-size:13px;
+    transition:.3s;
 }
 
 .nav button:hover{
@@ -45,41 +46,55 @@ header{
     color:#000;
 }
 
-/* GRID MASONRY */
-.grid{
-    column-count:3;
-    column-gap:15px;
+.nav button.active{
+    background:#fff;
+    color:#000;
+}
+
+/* GALERÍA 3 FILAS */
+.gallery-wrapper{
+    overflow-x:auto;
     padding:20px;
 }
 
-@media(max-width:900px){
-    .grid{column-count:2;}
+.grid{
+    display:grid;
+    grid-auto-flow:column;
+    grid-template-rows:repeat(3, 250px);
+    gap:15px;
+    width:max-content;
 }
 
 .card{
-    background:#2a2a2d;
-    margin-bottom:15px;
+    width:220px;
     border-radius:16px;
     overflow:hidden;
-    cursor:pointer;
+    background:#2a2a2d;
     border:1px solid rgba(255,255,255,0.08);
+    cursor:pointer;
+    position:relative;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:scale(1.03);
 }
 
 .card img{
     width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
+/* overlay */
 .info{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
     padding:10px;
-}
-
-.info h3{
-    font-size:14px;
-}
-
-.desc{
+    background:linear-gradient(transparent,rgba(0,0,0,0.8));
     font-size:12px;
-    color:#aaa;
 }
 
 /* MODAL */
@@ -144,8 +159,9 @@ select{
     <h2>TU MARCA</h2>
 </header>
 
+<!-- BOTONERA -->
 <div class="nav">
-    <button onclick="filtrar('todos')">Todo</button>
+    <button onclick="filtrar('todos')" class="active">Todo</button>
     <button onclick="filtrar('pijamas')">Pijamas</button>
     <button onclick="filtrar('accesorios')">Accesorios</button>
     <button onclick="filtrar('mugs')">Mugs</button>
@@ -153,8 +169,12 @@ select{
     <button onclick="filtrar('hoodies')">Hoodies</button>
 </div>
 
-<div class="grid" id="productos"></div>
+<!-- GALERÍA -->
+<div class="gallery-wrapper">
+    <div class="grid" id="productos"></div>
+</div>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
     <div class="modal-content">
         <img id="mainImg">
@@ -182,15 +202,15 @@ function render(data){
         cont.innerHTML+=`
         <div class="card" onclick="abrir(${i})">
             <img src="${p.imgs[0]}">
-            <div class="info">
-                <h3>${p.nombre}</h3>
-                <div class="desc">${p.desc}</div>
-            </div>
+            <div class="info">${p.nombre}</div>
         </div>`;
     });
 }
 
 function filtrar(cat){
+    document.querySelectorAll(".nav button").forEach(btn=>btn.classList.remove("active"));
+    event.target.classList.add("active");
+
     if(cat==="todos") return render(productos);
     render(productos.filter(p=>p.categoria===cat));
 }
