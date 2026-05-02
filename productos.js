@@ -10,6 +10,14 @@ const productos = [
     colores: ["Negro","Blanco"],
     tallas: ["S","M","L"]
 },
+    {
+    nombre: "Pijama Blanca",
+    desc: "Edición clara",
+    categoria: "pijamas",
+    imgs: ["img/img2.jpg"],
+    colores: ["Blanco"],
+    tallas: ["S","M","L"]
+}
 
 {
     nombre: "Accesorio Demo",
