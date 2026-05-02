@@ -12,8 +12,8 @@
 
 body{
     font-family:'Inter',sans-serif;
-    background:#0f0f10;
-    color:#fff;
+    background:#1c1c1e;
+    color:#f2f2f2;
 }
 
 /* HEADER */
@@ -47,8 +47,9 @@ header h1{
     overflow:hidden;
     cursor:pointer;
     position:relative;
-    background:#1a1a1c;
-    border:1px solid rgba(255,255,255,0.05);
+    background:#2a2a2d;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.03);
     transition:.3s;
 }
 
@@ -95,7 +96,7 @@ header h1{
     position:fixed;
     top:0;left:0;
     width:100%;height:100%;
-    background:#0f0f10;
+    background:#1c1c1e;
     display:none;
     justify-content:center;
     align-items:center;
@@ -130,7 +131,7 @@ select{
     width:100%;
     margin-top:10px;
     padding:10px;
-    background:#1a1a1c;
+    background:#2a2a2d;
     color:#fff;
     border:1px solid rgba(255,255,255,0.1);
     border-radius:10px;
@@ -181,6 +182,7 @@ let productoActual=null;
 
 function render(){
     const cont=document.getElementById("productos");
+    cont.innerHTML="";
     productos.forEach((p,i)=>{
         cont.innerHTML+=`
         <div class="card ${p.size}" onclick="abrir(${i})">
@@ -228,7 +230,7 @@ ${productoActual.nombre}
 Color: ${color}
 Talla: ${talla}`;
 
-    window.open(`https://wa.me/593TU_NUMERO?text=${encodeURIComponent(texto)}`);
+    window.open(`https://wa.me/593998588745?text=${encodeURIComponent(texto)}`);
 }
 
 document.getElementById("modal").onclick=function(e){
