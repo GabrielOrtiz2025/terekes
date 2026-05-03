@@ -1,62 +1,24 @@
 const productos = [
 
 {
-    nombre: "Yeti Garfield - Odie",
-    desc: "Tela termica con borrego / Unisex",
+    nombre: "Pijama Negra",
+    desc: "Algodón premium / Unisex",
     categoria: "pijamas",
     imgs: [
-        "img/img1.jpg"
-    ],
-    colores: ["Negro","Blanco"],
-    tallas: ["S","M","L"]
+        "img/img1.jpg",
+        "img/img1-2.jpg",
+        "img/img1-3.jpg"
+    ]
 },
-    {
+
+{
     nombre: "Pijama Blanca",
     desc: "Edición clara",
     categoria: "pijamas",
-    imgs: ["img/img2.jpg"],
-    colores: ["Blanco"],
-    tallas: ["S","M","L"]
-},
-    {
-    nombre: "Pijama Blanca",
-    desc: "Edición clara",
-    categoria: "pijamas",
-    imgs: ["img/img2.jpg"],
-    colores: ["Blanco"],
-    tallas: ["S","M","L"]
-},
-    {
-    nombre: "Pijama Blanca",
-    desc: "Edición clara",
-    categoria: "pijamas",
-    imgs: ["img/img2.jpg"],
-    colores: ["Blanco"],
-    tallas: ["S","M","L"]
-},
-    {
-    nombre: "Pijama Blanca",
-    desc: "Edición clara",
-    categoria: "pijamas",
-    imgs: ["img/img2.jpg"],
-    colores: ["Blanco"],
-    tallas: ["S","M","L"]
-},
-    {
-    nombre: "Pijama Blanca",
-    desc: "Edición clara",
-    categoria: "pijamas",
-    imgs: ["img/img2.jpg"],
-    colores: ["Blanco"],
-    tallas: ["S","M","L"]
-},
-    {
-    nombre: "Pijama Blanca",
-    desc: "Edición clara",
-    categoria: "pijamas",
-    imgs: ["img/img2.jpg"],
-    colores: ["Blanco"],
-    tallas: ["S","M","L"]
+    imgs: [
+        "img/img2.jpg",
+        "img/img2-2.jpg"
+    ]
 },
 
 {
@@ -65,9 +27,7 @@ const productos = [
     categoria: "accesorios",
     imgs: [
         "img/img1.jpg"
-    ],
-    colores: ["Negro"],
-    tallas: ["Única"]
+    ]
 },
 
 {
@@ -76,9 +36,7 @@ const productos = [
     categoria: "mugs",
     imgs: [
         "img/img1.jpg"
-    ],
-    colores: ["Blanco"],
-    tallas: ["Única"]
+    ]
 },
 
 {
@@ -87,21 +45,16 @@ const productos = [
     categoria: "camisetas",
     imgs: [
         "img/img1.jpg"
-    ],
-    colores: ["Negro"],
-    tallas: ["S","M","L"]
+    ]
 },
 
 {
-    nombre: "Yeti Garfield - Odie",
-    desc: "Tela termica con borrego / Unisex",
+    nombre: "Hoodie Demo",
+    desc: "Oversize",
     categoria: "hoodies",
     imgs: [
-        "img/hd_01.jpg",
-        "img/hd_02.jpg"
-    ],
-    colores: ["Negro"],
-    tallas: ["M","L"]
+        "img/img1.jpg"
+    ]
 }
 
 ];
