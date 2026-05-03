@@ -1,8 +1,8 @@
 const productos = [
 
 {
-    nombre: "Pijama Negra",
-    desc: "Algodón premium / Unisex",
+    nombre: "Yeti Garfield - Odie",
+    desc: "Tela termica con borrego / Unisex",
     categoria: "pijamas",
     imgs: [
         "img/img1.jpg"
@@ -93,11 +93,11 @@ const productos = [
 },
 
 {
-    nombre: "Hoodie Demo",
-    desc: "Oversize",
+    nombre: "Yeti Garfield - Odie",
+    desc: "Tela termica con borrego / Unisex",
     categoria: "hoodies",
     imgs: [
-        "img/img1.jpg"
+        "img/hd_01.jpg"
     ],
     colores: ["Negro"],
     tallas: ["M","L"]
