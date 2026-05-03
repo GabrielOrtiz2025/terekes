@@ -71,7 +71,6 @@ body{
     overflow:hidden;
     display:flex;
     flex-direction:column;
-    position: relative;
 }
 
 .img-producto{
@@ -79,8 +78,6 @@ body{
     height:260px;
     object-fit:cover;
     cursor:pointer;
-    position: relative;
-    z-index: 2;
 }
 
 /* INFO */
@@ -169,7 +166,6 @@ body{
 
 <body>
 
-<!-- BANNER -->
 <div class="banner">
     <div class="slides">
         <img src="img/banner1.jpg">
@@ -179,7 +175,6 @@ body{
     </div>
 </div>
 
-<!-- NAV -->
 <div class="nav">
 <button onclick="filtrar('pijamas')">Pijamas</button>
 <button onclick="filtrar('accesorios')">Accesorios</button>
@@ -190,7 +185,6 @@ body{
 
 <div class="grid" id="productos"></div>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
     <img id="imgModal">
 
@@ -229,18 +223,15 @@ function render(data){
             </div>
         </div>`;
     });
-
-    activarClicks();
 }
 
-function activarClicks(){
-    document.querySelectorAll(".img-producto").forEach(img=>{
-        img.addEventListener("click", function(){
-            const imgs = JSON.parse(this.dataset.imgs);
-            abrirModal(imgs);
-        });
-    });
-}
+/* 🔥 SOLUCIÓN REAL */
+document.getElementById("productos").addEventListener("click", function(e){
+    if(e.target.classList.contains("img-producto")){
+        const imgs = JSON.parse(e.target.dataset.imgs);
+        abrirModal(imgs);
+    }
+});
 
 function filtrar(cat){
     render(productos.filter(p=>p.categoria===cat));
@@ -250,7 +241,6 @@ function comprar(nombre){
     window.open(`https://api.whatsapp.com/send?phone=593998588745&text=Hola quiero ${nombre}`);
 }
 
-/* MODAL */
 function abrirModal(imgs){
     currentImgs = imgs;
     index = 0;
@@ -272,7 +262,6 @@ function prev(){
     document.getElementById("imgModal").src=currentImgs[index];
 }
 
-/* INIT */
 render(productos.filter(p=>p.categoria==="pijamas"));
 
 </script>
