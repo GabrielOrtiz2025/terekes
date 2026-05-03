@@ -71,6 +71,9 @@ body{
     overflow:hidden;
     display:flex;
     flex-direction:column;
+
+    /* 🔥 CORRECCIÓN */
+    position: relative;
 }
 
 .img-producto{
@@ -78,6 +81,10 @@ body{
     height:260px;
     object-fit:cover;
     cursor:pointer;
+
+    /* 🔥 CORRECCIÓN */
+    position: relative;
+    z-index: 2;
 }
 
 /* INFO */
@@ -213,7 +220,7 @@ function render(data){
     data.forEach(p=>{
         cont.innerHTML+=`
         <div class="card">
-            <img src="${p.imgs[0]}" data-imgs='${JSON.stringify(p.imgs)}' class="img-producto">
+            <img src="${p.imgs[0]}" onclick='abrirModal(${JSON.stringify(p.imgs)})' class="img-producto">
 
             <div class="info">
                 <b>${p.nombre}</b><br>
@@ -225,17 +232,6 @@ function render(data){
                 </button>
             </div>
         </div>`;
-    });
-
-    activarClicks();
-}
-
-function activarClicks(){
-    document.querySelectorAll(".img-producto").forEach(img=>{
-        img.addEventListener("click", function(){
-            const imgs = JSON.parse(this.dataset.imgs);
-            abrirModal(imgs);
-        });
     });
 }
 
