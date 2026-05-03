@@ -97,7 +97,8 @@ const productos = [
     desc: "Tela termica con borrego / Unisex",
     categoria: "hoodies",
     imgs: [
-        "img/hd_01.jpg"
+        "img/hd_01.jpg",
+        "img/hd_02.jpg"
     ],
     colores: ["Negro"],
     tallas: ["M","L"]
